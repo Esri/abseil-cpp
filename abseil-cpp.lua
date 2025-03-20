@@ -10,6 +10,10 @@ includedirs {
   ".",
 }
 
+defines {
+  "STRIP_LOG=1", // Prevent abseil-cpp making restricted windows calls for stack tracing
+}
+
 files {
     "absl/base/log_severity.cc",
     "absl/base/internal/raw_logging.cc",
