@@ -55,6 +55,8 @@ void InitializeSymbolizer(const char*) {
 }
 
 bool Symbolize(const void* pc, char* out, int out_size) {
+  return false;
+  /*
   if (out_size <= 0) {
     return false;
   }
@@ -76,6 +78,7 @@ bool Symbolize(const void* pc, char* out, int out_size) {
     out[out_size_t - 1] = '\0';
   }
   return true;
+  */
 }
 
 ABSL_NAMESPACE_END
