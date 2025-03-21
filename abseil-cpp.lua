@@ -12,6 +12,7 @@ includedirs {
 
 files {
     "absl/base/log_severity.cc",
+    "absl/base/internal/poison.cc",
     "absl/base/internal/raw_logging.cc",
     "absl/base/internal/spinlock_wait.cc",
     "absl/base/internal/low_level_alloc.cc",
@@ -19,6 +20,7 @@ files {
     "absl/base/internal/spinlock.cc",
     "absl/base/internal/sysinfo.cc",
     "absl/base/internal/thread_identity.cc",
+    "absl/base/internal/tracing.cc",
     "absl/base/internal/unscaledcycleclock.cc",
     "absl/base/internal/throw_delegate.cc",
     "absl/base/internal/scoped_set_env.cc",
@@ -46,7 +48,9 @@ files {
     "absl/debugging/internal/elf_mem_image.cc",
     "absl/debugging/internal/vdso_support.cc",
     "absl/debugging/internal/demangle.cc",
+    "absl/debugging/internal/decode_rust_punycode.cc",
     "absl/debugging/internal/demangle_rust.cc",
+    "absl/debugging/internal/utf8_for_code_point.cc",
     "absl/debugging/leak_check.cc",
     "absl/debugging/internal/stack_consumption.cc",
 
@@ -76,8 +80,8 @@ files {
     "absl/log/die_if_null.cc",
     "absl/log/flags.cc",
     "absl/log/globals.cc",
-    "absl/log/log_entry.cc",
     "absl/log/log_sink.cc",
+    "absl/log/internal/structured_proto.cc",
     "absl/log/internal/vlog_config.cc",
     "absl/log/internal/fnmatch.cc",
 
@@ -91,7 +95,7 @@ files {
     "absl/random/seed_gen_exception.cc",
     "absl/random/seed_sequences.cc",
     "absl/random/internal/seed_material.cc",
-    "absl/random/internal/pool_urbg.cc",
+    "absl/random/internal/entropy_pool.cc",
     "absl/random/internal/randen.cc",
     "absl/random/internal/randen_slow.cc",
     "absl/random/internal/randen_detect.cc",
@@ -108,17 +112,10 @@ files {
     "absl/strings/charconv.cc",
     "absl/strings/escaping.cc",
     "absl/strings/internal/charconv_bigint.cc",
-    "absl/strings/internal/charconv_bigint.h",
     "absl/strings/internal/charconv_parse.cc",
-    "absl/strings/internal/charconv_parse.h",
     "absl/strings/internal/damerau_levenshtein_distance.cc",
     "absl/strings/internal/memutil.cc",
-    "absl/strings/internal/memutil.h",
-    "absl/strings/internal/stringify_sink.h",
     "absl/strings/internal/stringify_sink.cc",
-    "absl/strings/internal/stl_type_traits.h",
-    "absl/strings/internal/str_join_internal.h",
-    "absl/strings/internal/str_split_internal.h",
     "absl/strings/match.cc",
     "absl/strings/numbers.cc",
     "absl/strings/str_cat.cc",
@@ -147,8 +144,6 @@ files {
     "absl/strings/internal/cordz_sample_token.cc",
     "absl/strings/cord.cc",
     "absl/strings/cord_analysis.cc",
-    "absl/strings/cord_analysis.h",
-    "absl/strings/cord_buffer.cc",
 
     "absl/synchronization/internal/graphcycles.cc",
     "absl/synchronization/internal/kernel_timeout.cc",
@@ -180,10 +175,6 @@ files {
     "absl/time/internal/cctz/src/time_zone_lookup.cc",
     "absl/time/internal/cctz/src/time_zone_posix.cc",
     "absl/time/internal/cctz/src/zone_info_source.cc",
-
-    "absl/types/bad_any_cast.cc",
-    "absl/types/bad_optional_access.cc",
-    "absl/types/bad_variant_access.cc",
 }
 
 if (_PLATFORM_ANDROID) then
