@@ -225,6 +225,11 @@ if (_PLATFORM_MACOS) then
 end
 
 if (_PLATFORM_WINDOWS) then
+
+  files {
+    "absl/time/internal/cctz/src/time_zone_name_win.cc"
+  }
+
 end
 
 if (_PLATFORM_WINUWP) then
