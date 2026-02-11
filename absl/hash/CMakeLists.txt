@@ -38,7 +38,6 @@ absl_cc_library(
     absl::optional
     absl::variant
     absl::utility
-    absl::low_level_hash
     absl::weakly_mixed_integer
   PUBLIC
 )
@@ -138,6 +137,7 @@ absl_cc_library(
   DEPS
     absl::config
     absl::core_headers
+    absl::bits
     absl::endian
 )
 
@@ -151,24 +151,6 @@ absl_cc_test(
   DEPS
     absl::city
     GTest::gmock_main
-)
-
-# Internal-only target, do not depend on directly.
-absl_cc_library(
-  NAME
-    low_level_hash
-  HDRS
-    "internal/low_level_hash.h"
-  SRCS
-    "internal/low_level_hash.cc"
-  COPTS
-    ${ABSL_DEFAULT_COPTS}
-  DEPS
-    absl::config
-    absl::core_headers
-    absl::endian
-    absl::int128
-    absl::prefetch
 )
 
 # Internal-only target, do not depend on directly.
@@ -191,7 +173,7 @@ absl_cc_test(
   COPTS
     ${ABSL_TEST_COPTS}
   DEPS
-    absl::low_level_hash
+    absl::hash
     absl::strings
     GTest::gmock_main
 )

@@ -53,9 +53,7 @@
 //     ABSL_BLOCK_TAIL_CALL_OPTIMIZATION();
 //     return result;
 //   }
-#if defined(__pnacl__)
-#define ABSL_BLOCK_TAIL_CALL_OPTIMIZATION() if (volatile int x = 0) { (void)x; }
-#elif defined(__clang__)
+#if defined(__clang__)
 // Clang will not tail call given inline volatile assembly.
 #define ABSL_BLOCK_TAIL_CALL_OPTIMIZATION() __asm__ __volatile__("")
 #elif defined(__GNUC__)
@@ -224,7 +222,7 @@
 
 // `ABSL_UNREACHABLE()` is an unreachable statement.  A program which reaches
 // one has undefined behavior, and the compiler may optimize accordingly.
-#if ABSL_OPTION_HARDENED == 1 && defined(NDEBUG)
+#if (ABSL_OPTION_HARDENED == 1 || ABSL_OPTION_HARDENED == 2) && defined(NDEBUG)
 // Abort in hardened mode to avoid dangerous undefined behavior.
 #define ABSL_UNREACHABLE()                \
   do {                                    \
