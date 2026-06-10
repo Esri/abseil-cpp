@@ -1,3 +1,4 @@
+//
 // Copyright 2026 The Abseil Authors.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,34 +13,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef ABSL_EXTEND_INTERNAL_IS_TUPLE_HASHABLE_H_
-#define ABSL_EXTEND_INTERNAL_IS_TUPLE_HASHABLE_H_
+#include "absl/base/internal/hardening.h"
 
-#include <tuple>
-#include <type_traits>
+#include <atomic>
 
 #include "absl/base/config.h"
-#include "absl/hash/hash.h"
+#include "absl/base/macros.h"
 
 namespace absl {
 ABSL_NAMESPACE_BEGIN
-namespace extend_internal {
 
-// Trait to check if all members of a tuple are absl::Hash-able.
-//
-template <typename T>
-struct IsTupleHashable {};
+namespace base_internal {
 
-// TODO(b/185498964): We wouldn't need absl::Hash if the hasher object provided
-// an "is_hashable" trait.
-template <typename... Ts>
-struct IsTupleHashable<std::tuple<Ts...>>
-    : std::integral_constant<bool,
-                             (std::is_constructible_v<absl::Hash<Ts>> && ...)> {
-};
+void SetAbslHardeningEnabled([[maybe_unused]] bool enabled) {
+}
 
-}  // namespace extend_internal
+}  // namespace base_internal
+
 ABSL_NAMESPACE_END
 }  // namespace absl
-
-#endif  // ABSL_EXTEND_INTERNAL_IS_TUPLE_HASHABLE_H_
