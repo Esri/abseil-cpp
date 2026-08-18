@@ -24,6 +24,9 @@ includedirs {
 --
 -- ```
 -- set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+-- set(CMAKE_CXX_STANDARD 20)
+-- set(CMAKE_CXX_STANDARD_REQUIRED ON)
+-- set(CMAKE_CXX_EXTENSIONS OFF)
 -- ```
 --
 -- 2. Build abseil-cpp using the CMake build system:
@@ -32,7 +35,7 @@ includedirs {
 -- cd ~/my_dev_dir/3rdparty/
 -- mkdir abseil_build
 -- cd abseil_build
--- /usr/local/rtc/cmake/3.29.2/bin/cmake ../abseil-cpp
+-- /usr/local/rtc/cmake/4.2.1/bin/cmake ../abseil-cpp
 -- ```
 --
 -- 3. List the source files required to build abseil-cpp:
