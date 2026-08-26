@@ -71,7 +71,7 @@
 // Checks whether pthread_cpu_number_np is available.
 #ifdef ABSL_HAVE_PTHREAD_CPU_NUMBER_NP
 #error ABSL_HAVE_PTHREAD_CPU_NUMBER_NP cannot be directly set
-#elif defined(__APPLE__) && defined(__has_include) &&              \
+#elif defined(__APPLE__) &&                                        \
     ((defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) &&    \
       __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 110000) ||  \
      (defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) &&   \
@@ -383,10 +383,16 @@ static void AbslFailureSignalHandler(int signo, siginfo_t*, void* ucontext) {
       // a bit for it to finish. If the other thread doesn't kill us,
       // we do so after sleeping.
       PortableSleepForSeconds(3);
-      RaiseToDefaultHandler(signo);
-      // The recursively raised signal may be blocked until we return.
-      return;
+    } else {
+      // Same thread re-entered: the handler itself faulted. Do NOT fall through
+      // and re-run the body (which would recurse under SA_NODEFER, resetting
+      // the alarm each time and consuming the unguarded altstack). Instead,
+      // terminate now.
     }
+
+    RaiseToDefaultHandler(signo);
+    // The recursively raised signal may be blocked until we return.
+    return;
   }
 
   // Increase the chance that the CPU we report was the same CPU on which the

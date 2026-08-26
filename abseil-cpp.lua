@@ -24,6 +24,9 @@ includedirs {
 --
 -- ```
 -- set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+-- set(CMAKE_CXX_STANDARD 20)
+-- set(CMAKE_CXX_STANDARD_REQUIRED ON)
+-- set(CMAKE_CXX_EXTENSIONS OFF)
 -- ```
 --
 -- 2. Build abseil-cpp using the CMake build system:
@@ -32,7 +35,7 @@ includedirs {
 -- cd ~/my_dev_dir/3rdparty/
 -- mkdir abseil_build
 -- cd abseil_build
--- /usr/local/rtc/cmake/3.29.2/bin/cmake ../abseil-cpp
+-- /usr/local/rtc/cmake/4.2.1/bin/cmake ../abseil-cpp
 -- ```
 --
 -- 3. List the source files required to build abseil-cpp:
@@ -61,8 +64,10 @@ files {
     "absl/base/internal/sysinfo.cc",
     "absl/base/internal/thread_identity.cc",
     "absl/base/internal/unscaledcycleclock.cc",
+    "absl/base/internal/cpu_detect.cc",
+    "absl/base/internal/hardening.cc",
     "absl/base/internal/low_level_alloc.cc",
-    "absl/base/internal/throw_delegate.cc",
+    "absl/base/throw_delegate.cc",
     "absl/base/internal/scoped_set_env.cc",
     "absl/base/internal/strerror.cc",
     "absl/base/internal/poison.cc",
@@ -70,7 +75,6 @@ files {
     "absl/container/internal/hashtablez_sampler.cc",
     "absl/container/internal/hashtablez_sampler_force_weak_definition.cc",
     "absl/container/internal/raw_hash_set.cc",
-    "absl/crc/internal/cpu_detect.cc",
     "absl/crc/internal/crc.cc",
     "absl/crc/internal/crc_x86_arm_combined.cc",
     "absl/crc/crc32c.cc",
@@ -78,7 +82,6 @@ files {
     "absl/crc/internal/crc_memcpy_x86_arm_combined.cc",
     "absl/crc/internal/crc_non_temporal_memcpy.cc",
     "absl/crc/internal/crc_cord_state.cc",
-    "absl/debugging/internal/borrowed_fixup_buffer.cc",
     "absl/debugging/internal/address_is_readable.cc",
     "absl/debugging/internal/elf_mem_image.cc",
     "absl/debugging/internal/vdso_support.cc",
@@ -124,6 +127,7 @@ files {
     "absl/numeric/int128.cc",
     "absl/profiling/internal/exponential_biased.cc",
     "absl/profiling/internal/periodic_sampler.cc",
+    "absl/profiling/internal/profile_builder.cc",
     "absl/profiling/hashtable.cc",
     "absl/random/discrete_distribution.cc",
     "absl/random/gaussian_distribution.cc",
@@ -142,6 +146,7 @@ files {
     "absl/status/status.cc",
     "absl/status/status_payload_printer.cc",
     "absl/status/statusor.cc",
+    "absl/status/status_builder.cc",
     "absl/strings/internal/ostringstream.cc",
     "absl/strings/internal/utf8.cc",
     "absl/strings/internal/escaping_rtc_shim.cc",
@@ -207,6 +212,8 @@ files {
     "absl/time/duration.cc",
     "absl/time/format.cc",
     "absl/time/time.cc",
+    "absl/time/clock_interface.cc",
+    "absl/types/source_location.cc",
 }
 
 if (_PLATFORM_ANDROID) then
