@@ -2,7 +2,7 @@ from conans import ConanFile
 
 class AbseilConan(ConanFile):
     name = "abseil-cpp"
-    version = "0.0.1"
+    version = "20260817.0"
     url = "https://github.com/Esri/abseil-cpp/blob/runtimecore"
     license = "https://github.com/Esri/abseil-cpp/blob/runtimecore/LICENSE"
     description = "Abseil is an open-source collection of C++ code (compliant to C++14) designed to augment the C++ standard library."
